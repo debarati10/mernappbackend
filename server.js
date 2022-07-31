@@ -26,14 +26,6 @@ app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/images', imageRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('/frontend/build'));
-  const path = require("path");
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-  )
-} 
-
 app.post('/create-payment', async(req, res)=> {
   const {amount} = req.body;
   console.log(amount);
@@ -50,17 +42,10 @@ app.post('/create-payment', async(req, res)=> {
    }
 })
 
-/*const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8080
 
-server.listen(process.env.PORT || 8080, ()=> {
-  console.log(`server running`)
-})*/
-
-const host = '0.0.0.0';
-const port = process.env.PORT || 8080;
-
-app.listen(port, host, function() {
-  console.log("Server started.......");
-});
+server.listen(PORT, ()=> {
+  console.log(`server running at port ${PORT}`)
+})
 
 app.set('socketio', io);
