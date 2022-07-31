@@ -26,6 +26,18 @@ app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/images', imageRoutes);
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('/frontend/build'));
+  const path= require("path");
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+} else {
+  app.get('/', (req, res) => {
+    res.send('APP is running....')
+  })
+}
+
 app.post('/create-payment', async(req, res)=> {
   const {amount} = req.body;
   console.log(amount);
