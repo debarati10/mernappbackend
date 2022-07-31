@@ -50,10 +50,17 @@ app.post('/create-payment', async(req, res)=> {
    }
 })
 
-//const PORT = process.env.PORT || 8080
+/*const PORT = process.env.PORT || 8080
 
 server.listen(process.env.PORT || 8080, ()=> {
   console.log(`server running`)
-})
+})*/
+
+const host = '0.0.0.0';
+const port = process.env.PORT || 8080;
+
+app.listen(port, host, function() {
+  console.log("Server started.......");
+});
 
 app.set('socketio', io);
