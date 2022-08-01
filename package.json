@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "dev": "nodemon server.js",
-  "start": "node server.js",
-  "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "nodemon": "^2.0.19",
     "socket.io": "^4.5.1",
     "stripe": "^9.11.0",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "websocket": "^1.0.34"
   }
 }
