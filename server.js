@@ -8,9 +8,12 @@ require('./connection')
 const server = http.createServer(app);
 const {Server} = require('socket.io');
 const io = new Server(server, {
-  cors: `${process.env.BACKEND}`,
-  methods: ['GET', 'POST', 'PATCH', "DELETE"]
-})
+  cors: {
+  origin : `${process.env.BACKEND}`,
+  methods: ['GET', 'POST', 'PATCH', "DELETE"],
+  transports: ['websocket']
+  }
+});
 
 const User = require('./models/User');
 const userRoutes = require('./routes/userRoutes');
