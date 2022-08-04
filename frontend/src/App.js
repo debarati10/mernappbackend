@@ -22,7 +22,7 @@ function App() {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
     useEffect(() => {
-        const socket = io("ws://0.0.0.0/0:8080",{ transports : ['websocket']} );
+        const socket = io("wss://localhost:8080",{ transports : ['websocket']} );
         socket.off("notification").on("notification", (msgObj, user_id) => {
             // logic for notification
             if (user_id === user._id) {
