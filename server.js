@@ -2,15 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const http = require('http');
-require(`dotenv` ).config();
+require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 require('./connection')
 const server = http.createServer(app);
 const {Server} = require('socket.io');
 const io = new Server(server, {
-  cors: `${process.env.BACKEND}`,
-  methods: ['GET', 'POST', 'PATCH', "DELETE"],
-  transports : ['websocket']
+  cors: {
+    origin : `${process.env.BACKEND}`,
+    methods: ['GET', 'POST', 'PATCH', "DELETE"],
+    transports : ['websocket']},
 });
 
 const User = require('./models/User');
@@ -27,8 +28,9 @@ app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/images', imageRoutes);
 
+
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('./frontend/build'));
+  app.use(static('./frontend/build'));
   const path= require("path");
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
